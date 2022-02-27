@@ -1,0 +1,17 @@
+# VScode specific dirs
+.vscode
+
+# Virtual environment
+app_env/
+
+# Main configuration secrets
+config.yml
+
+# Cache files
+.cache
+
+# Pycache ignore
+__pycache__/
+
+# Coverage stats
+.coverage

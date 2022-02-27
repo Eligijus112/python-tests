@@ -1,0 +1,5 @@
+requests==2.27.1
+pandas==1.4.1
+pytest==7.0.1
+scikit-learn==1.0.2
+coverage==6.3.2
