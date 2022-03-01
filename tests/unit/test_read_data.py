@@ -20,4 +20,4 @@ def test_data_reading():
 
     # Assert
     assert d.shape == (3, 2)
-    assert (d.columns == ['reviewText', 'overall']).all()
+    assert set(d.columns) == set(['reviewText', 'overall'])
