@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 # Article on testing 
 
-The main article that supplement this code can be accessed [here]()
+The main article that supplement this code can be accessed [here](https://eligijus-bujokas.medium.com/testing-software-code-a-python-practical-guide-5b92b79879b5)
 
 This article is written by me and covers most of the basic topics in testing that will be needed to write robust software.
 
@@ -52,3 +52,40 @@ f(text) -> class
 The text is a customer review, and the class is the overall score of the product. 
 
 The pipeline creates a model where given a text, the ML model predicts the review score of the product (1 - 5 stars).
+
+# Running the tests
+
+The tests are grouped into tests, integration and end to end tests:
+
+```
+├── end_to_end
+│   ├── data
+│   ├── __init__.py
+│   └── test_end_to_end.py
+├── __init__.py
+├── integration
+│   ├── data
+│   ├── __init__.py
+│   ├── test_creating_fitting.py
+│   └── test_reading_cleaning.py
+└── unit
+    ├── data
+    ├── __init__.py
+    ├── test_clean_data.py
+    ├── test_evaluate_model.py
+    ├── test_model_fitting.py
+    ├── test_model_input_preparation.py
+    └── test_read_data.py
+```
+
+To run all the tests, use the command: 
+
+```
+pytest
+```
+
+With coverage report:
+
+```
+coverage run -m pytest && coverage report
+```

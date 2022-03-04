@@ -8,15 +8,37 @@ from pipeline.modules.evaluate_model import eval_model
 # Directory traversal 
 import os 
 
-if __name__ == "__main__":
-    # Defining the current file dir 
-    _file_dir = os.path.dirname(os.path.realpath(__file__))
-    
-    # Defining the path to data 
-    _data_path = os.path.join(_file_dir, 'data', 'data.json')
+# Typehinting 
+from typing import Tuple
 
+def pipeline(
+    input_data_path: str,
+    top_features: int = 1000,
+    ngram_range: tuple = (1, 1),
+) -> Tuple:
+    """
+    The main pipeline function that reads input data and outputs the model along with statistics on the test set 
+
+    Arguments
+    ---------
+    input_data_path: str
+        The path to the input data
+    top_features: int
+        The number of top features based on frequency to be used in the model
+    ngram_range: tuple
+        The ngram range to be used in the model
+
+    Returns
+    -------
+    clf: TextCLF
+        The model that has been fitted to the data
+    stats: pd.DataFrame
+        The statistics on the test set
+    precision: float
+        The overall precision of the model
+    """
     # Reading the data 
-    d = read_json(_data_path)
+    d = read_json(input_data_path)
 
     # Cleaning the reviewText column 
     d['reviewText'] = [clean_text(x) for x in d['reviewText']]
@@ -33,8 +55,8 @@ if __name__ == "__main__":
 
     # Creating the BOW matrix 
     clf.fit_count_vectorizer(
-        top_features=100,
-        ngram_range=(1, 1)
+        top_features=top_features,
+        ngram_range=ngram_range
     )
 
     # Fitting the model
@@ -48,6 +70,19 @@ if __name__ == "__main__":
 
     # Evaluating the model
     stats, precision = eval_model(Y_test, y_pred)
+
+    # Returning the model object and the stats
+    return clf, stats, precision
+
+if __name__ == "__main__":
+    # Defining the current file dir 
+    _file_dir = os.path.dirname(os.path.realpath(__file__))
+    
+    # Defining the path to data 
+    _data_path = os.path.join(_file_dir, 'data', 'data.json')
+
+    # Applying the pipeline
+    clf, stats, precision = pipeline(_data_path)
 
     # Printing the results
     print(f"Per label statistics:\n{stats}")
