@@ -1,4 +1,4 @@
-# Testing in software development 
+# Testing a Machine Learning pipeline
 
 This project showcases in practise how tests are written and what are they in general when talking about software development.
 
@@ -52,6 +52,12 @@ f(text) -> class
 The text is a customer review, and the class is the overall score of the product. 
 
 The pipeline creates a model where given a text, the ML model predicts the review score of the product (1 - 5 stars).
+
+To run the whole pipeline use the command: 
+
+```
+python -m pipeline.pipeline
+```
 
 # Running the tests
 
